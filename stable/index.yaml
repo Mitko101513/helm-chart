@@ -3,10 +3,10 @@ entries:
   mk-soap:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-11-29T14:15:56.4321896+01:00"
-    digest: 3551a4b672fe1c4aa8a4f25cd5d385b526a4f7958fa7fa1da24a48cc993f9424
+    created: "2023-11-29T14:47:25.8053497+01:00"
+    digest: 218aabfe25c17f3b7cae923c17ea53765bde9232011539279856222cf880292b
     name: mk-soap
     urls:
-    - https://mitko101513.github.io/helm-chart/mk-soap-1.0.0.tgz
+    - https://mitko101513.github.io/helm-chart/stables/mk-soap-1.0.0.tgz
     version: 1.0.0
-generated: "2023-11-29T14:15:56.4311235+01:00"
+generated: "2023-11-29T14:47:25.8043453+01:00"

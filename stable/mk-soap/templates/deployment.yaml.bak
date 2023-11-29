@@ -38,10 +38,10 @@ spec:
               failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
               periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
           ports:
-            - containerPort: {{.Values.ports.http.value}}
-              name: {{.Values.ports.http.name}} 
-            - containerPort: {{.Values.ports.management.value}}
-              name: {{.Values.ports.management.name}}
+            - containerPort: {{.Values.ports.http.name}}
+              name: {{.Values.ports.http.value}}
+            - containerPort: {{.Values.ports.management.name}}
+              name: {{.Values.ports.management.value}}
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: dev
