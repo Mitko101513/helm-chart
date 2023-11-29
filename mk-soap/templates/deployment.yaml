@@ -1,0 +1,50 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: mksoap
+          image: mitko101513/mk-soap:1.0.1
+          resources:
+            requests:
+              memory: {{ .Values.resources.memoryRequest }}
+              cpu: {{ .Values.resources.cpuRequest }}
+            limits:
+              memory: {{ .Values.resources.memoryLimit }}
+              cpu: {{ .Values.resources.cpuLimit }}
+            livenessProbe:
+              initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+              httpGet:
+                port: {{ .Values.ports.management.value }}
+                path: {{ .Values.probes.liveness.path }}
+              failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+              periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+            readinessProbe:
+              initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+              httpGet:
+                port: {{ .Values.ports.management.value }}
+                path: {{ .Values.probes.readiness.path }}
+              failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+              periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+          ports:
+            - containerPort: {{.Values.ports.http.name}}
+              name: {{.Values.ports.http.value}}
+            - containerPort: {{.Values.ports.management.name}}
+              name: {{.Values.ports.management.value}}
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+            - name: DATABASE_URL
+              value: jdbc:postgresql://posgres:5432/liqsoap
+          imagePullPolicy: Always
